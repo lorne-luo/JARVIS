@@ -1,0 +1,9 @@
+# Dev/Deployment
+sphinx
+sphinx_rtd_theme
+nose
+coverage
+pypi-publisher
+
+python-telegram-bot==12.1.1
+git+https://github.com/Telstra/MessagingAPI-SDK-python.git
