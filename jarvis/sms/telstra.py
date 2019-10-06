@@ -7,7 +7,7 @@ from Telstra_Messaging.rest import ApiException
 
 from .validator import validate_au_mobile
 from .. import config
-from ..utils import redis
+from ..redis import counter as redis_counter
 
 logger = logging.getLogger(__name__)
 TELSTRA_LENGTH_PER_SMS = 160
@@ -15,7 +15,7 @@ TELSTRA_MONTHLY_FREE_LIMIT = 1000
 
 
 def get_token():
-    access_token = redis.get_telstra_access_token()
+    access_token = redis_counter.get_telstra_access_token()
     if access_token:
         return access_token
 
@@ -30,7 +30,7 @@ def get_token():
         api_response = api_instance.auth_token(client_id, client_secret, grant_type)
         access_token = api_response.access_token
         expires_in = int(api_response.expires_in) if api_response.expires_in.isdigit() else 3599
-        redis.set_telstra_access_token(access_token, expires_in)
+        redis_counter.set_telstra_access_token(access_token, expires_in)
         return access_token
     except ApiException as e:
         logger.error("Exception when calling AuthenticationApi->auth_token: %s\n" % e)
@@ -38,7 +38,7 @@ def get_token():
 
 
 def _get_from_number():
-    destination_address = redis.get_telstra_destination_address()
+    destination_address = redis_counter.get_telstra_destination_address()
     if destination_address:
         return destination_address
 
@@ -50,12 +50,12 @@ def _get_from_number():
     destination_address = api_response.destination_address
     expiry_timestamp = int(api_response.expiry_date / 1000)
     expires_in = expiry_timestamp - int(time.mktime(datetime.datetime.now().timetuple()))
-    redis.set_telstra_destination_address(destination_address, expires_in)
+    redis_counter.set_telstra_destination_address(destination_address, expires_in)
     return destination_address
 
 
 def send_au_sms(to, body, app_name=None):
-    counter = redis.get_telstra_monthly_counter()
+    counter = redis_counter.get_telstra_monthly_counter()
     counter = int(counter)
     if not counter < TELSTRA_MONTHLY_FREE_LIMIT:
         logger.info('[SMS] Telstra SMS reach 1000 free limitation.')
@@ -91,13 +91,13 @@ def send_au_sms(to, body, app_name=None):
         success = api_response.messages[0].delivery_status == 'MessageWaiting'
 
         if success:
-            counter = redis.get_telstra_monthly_counter()
+            counter = redis_counter.get_telstra_monthly_counter()
             counter = int(counter)
             counter += 1
-            redis.set_telstra_monthly_counter(counter)
+            redis_counter.set_telstra_monthly_counter(counter)
             if counter == TELSTRA_MONTHLY_FREE_LIMIT - 1:
                 send_to_admin('[Warning] Telstra sms meet monthly limitation.')
-                redis.set_telstra_monthly_counter(counter + 1)
+                redis_counter.set_telstra_monthly_counter(counter + 1)
 
             return True, 'MessageWaiting'
     except ApiException as e:
