@@ -7,6 +7,7 @@ import rpyc
 from rpyc.utils.server import ThreadedServer
 
 from jarvis import config
+from jarvis.redis_client import client
 from jarvis.sms import send_to_admin
 
 logger = logging.getLogger(__name__)

@@ -7,7 +7,7 @@ from Telstra_Messaging.rest import ApiException
 
 from .validator import validate_au_mobile
 from .. import config
-from ..redis import counter as redis_counter
+from ..redis_client import counter as redis_counter
 
 logger = logging.getLogger(__name__)
 TELSTRA_LENGTH_PER_SMS = 160
