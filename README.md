@@ -21,7 +21,12 @@ Or clone the repo:
 
     $ git clone https://github.com/lorne-luo/jarvis.git
     $ python setup.py install
-    
+
+
+How to run
+--------------------
+    python server.py
+
 Contributing
 ------------
 

@@ -1,8 +1,10 @@
 import inspect
 import logging
 import sys
+from datetime import datetime
 
 import click
+import redis
 import rpyc
 from rpyc.utils.server import ThreadedServer
 
@@ -36,8 +38,20 @@ class JarvisService(rpyc.Service):
 @click.command()
 @click.option('--port', default=54321, help='Port of JARVIS service')
 def main(port):
-    click.echo("JARVIS starting..")
+    # test redis connection
+    try:
+        client.test_connection()
+    except redis.ConnectionError as ex:
+        logger.error(str(ex))
+        sys.stderr.write(f'{str(ex)}\n')
+        return 1
+
     server = ThreadedServer(JarvisService, port=port)
+
+    dt_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    start_info = f"{dt_str}# JARVIS started."
+    logger.info(start_info)
+
     server.start()
     return 0
 
