@@ -2,13 +2,15 @@ import inspect
 import logging
 import sys
 from datetime import datetime
+from uuid import uuid1
 
 import click
 import redis
 import rpyc
 from rpyc.utils.server import ThreadedServer
 
-from jarvis import config
+from aliyun.email.smtp import send_email
+from aliyun.sms.service import send_cn_sms
 from jarvis.redis_client import client
 from jarvis.sms import send_to_admin
 from sms import send_au_sms
@@ -31,7 +33,7 @@ class JarvisService(rpyc.Service):
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
 
-    def exposed_sms_to_admin(self, text, from_app):
+    def exposed_sms_admin(self, text, from_app):
         try:
             logger.info(f'sms_to_admin from {from_app}: {text}')
             return send_to_admin(text)
@@ -46,11 +48,22 @@ class JarvisService(rpyc.Service):
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
-    def exposed_config(self):
+    # =================================== Aliyun Email =================================
+    def exposed_send_mail(self, receivers, subject, html_content, text_content=None, from_app=None):
         try:
-            return config.__dict__
+            logger.info(f'send_email from {from_app}: to {receivers} # {html_content or text_content}')
+            return send_email(receivers, subject, html_content, text_content)
         except Exception as ex:
-            logger.error(f'[{inspect.stack()[0][3]}] {ex}')
+            logger.error(f'[{inspect.stack()[0][3]}] {ex}, to {receivers} # {html_content or text_content}')
+
+    # =================================== Aliyun SMS CN =================================
+    def exposed_sms_cn(self, phone_numbers, template_code, template_param=None, business_id=None):
+        try:
+            business_id = business_id or uuid1()
+            return send_cn_sms(business_id, phone_numbers, template_code, template_param)
+        except Exception as ex:
+            logger.error(
+                f'[{inspect.stack()[0][3]}] {ex}, to {phone_numbers}, template_code={template_code}, template_param={template_param}')
 
 
 @click.command()

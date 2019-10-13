@@ -6,8 +6,8 @@ class JarvisClient(object):
     def __init__(self, port, hostname='localhost'):
         self.conn = rpyc.connect(hostname, port)
 
-    def sms_to_admin(self, text):
-        return self.conn.root.sms_to_admin(text)
+    def sms_admin(self, text, from_app=None):
+        return self.conn.root.sms_admin(text, from_app)
 
     def test(self):
         return print(self.conn.root.config())
