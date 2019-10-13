@@ -54,7 +54,7 @@ def _get_from_number():
     return destination_address
 
 
-def send_au_sms(to, body, app_name=None):
+def send_au_sms(to, body):
     counter = redis_counter.get_telstra_monthly_counter()
     counter = int(counter)
     if not counter < TELSTRA_MONTHLY_FREE_LIMIT:
@@ -105,5 +105,5 @@ def send_au_sms(to, body, app_name=None):
         return False, str(e)
 
 
-def send_to_admin(body, app_name=None):
-    send_au_sms(config.ADMIN_MOBILE_NUMBER, body, app_name)
+def send_to_admin(body):
+    send_au_sms(config.ADMIN_MOBILE_NUMBER, body)

@@ -11,6 +11,8 @@ from rpyc.utils.server import ThreadedServer
 from jarvis import config
 from jarvis.redis_client import client
 from jarvis.sms import send_to_admin
+from sms import send_au_sms
+from telegram.bot import telegram_admin
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +23,17 @@ class JarvisService(rpyc.Service):
         print(inspect.stack()[0][3])
         return a + b
 
-    def exposed_sms_to_admin(self, text):
+    # =================================== SMS =================================
+    def exposed_sms_au(self, to, text, from_app):
         try:
-            logger.debug(f'send_to_admin: {text}')
+            logger.info(f'sms_au from {from_app}: {to} @ {text}')
+            return send_au_sms(to, text)
+        except Exception as ex:
+            logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
+
+    def exposed_sms_to_admin(self, text, from_app):
+        try:
+            logger.info(f'sms_to_admin from {from_app}: {text}')
             return send_to_admin(text)
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
