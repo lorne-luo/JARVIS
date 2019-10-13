@@ -9,12 +9,11 @@ import redis
 import rpyc
 from rpyc.utils.server import ThreadedServer
 
-from aliyun.email.smtp import send_email
-from aliyun.sms.service import send_cn_sms
+from jarvis.aliyun.email.smtp import send_email
+from jarvis.aliyun.sms.service import send_cn_sms
 from jarvis.redis_client import client
-from jarvis.sms import send_to_admin
-from sms import send_au_sms
-from telegram.bot import telegram_admin
+from jarvis.sms import send_to_admin, send_au_sms
+from jarvis.telegram.bot import telegram_admin
 
 logger = logging.getLogger(__name__)
 
