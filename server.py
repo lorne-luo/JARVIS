@@ -38,6 +38,14 @@ class JarvisService(rpyc.Service):
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
 
+    # =================================== TELEGRAM =================================
+    def exposed_telegram_admin(self, message, from_app):
+        try:
+            logger.info(f'telegram_admin from {from_app}: {message}')
+            return telegram_admin(message)
+        except Exception as ex:
+            logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
+
     def exposed_config(self):
         try:
             return config.__dict__
