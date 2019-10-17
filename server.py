@@ -25,19 +25,19 @@ class JarvisService(rpyc.Service):
         return a + b
 
     # =================================== SMS =================================
-    def exposed_sms_au(self, to, text, from_app):
+    def exposed_sms_au(self, to, message, from_app):
         try:
-            logger.info(f'sms_au from {from_app}: {to} @ {text}')
-            return send_au_sms(to, text)
+            logger.info(f'sms_au from {from_app}: {to} @ {message}')
+            return send_au_sms(to, message)
         except Exception as ex:
-            logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
+            logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
-    def exposed_sms_admin(self, text, from_app):
+    def exposed_sms_admin(self, message, from_app):
         try:
-            logger.info(f'sms_to_admin from {from_app}: {text}')
-            return send_to_admin(text)
+            logger.info(f'sms_to_admin from {from_app}: {message}')
+            return send_to_admin(message)
         except Exception as ex:
-            logger.error(f'[{inspect.stack()[0][3]}] {ex}, text={text}')
+            logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
     # =================================== TELEGRAM =================================
     def exposed_telegram_admin(self, message, from_app):
