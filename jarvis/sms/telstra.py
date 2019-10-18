@@ -54,19 +54,19 @@ def _get_from_number():
     return destination_address
 
 
-def send_au_sms(to, body):
+def send_au_sms(mobile_number, message):
     counter = redis_counter.get_telstra_monthly_counter()
     counter = int(counter)
     if not counter < TELSTRA_MONTHLY_FREE_LIMIT:
         logger.info('[SMS] Telstra SMS reach 1000 free limitation.')
         return False, 'Telstra SMS reach 1000 free limitation.'
 
-    to = validate_au_mobile(to)
-    if not to:
+    mobile_number = validate_au_mobile(mobile_number)
+    if not mobile_number:
         return False, 'INVALID_PHONE_NUMBER'
 
-    body = str(body)
-    if not body:
+    message = str(message)
+    if not message:
         return False, 'EMPTY_CONTENT'
 
     # Configure OAuth2 access token for authorization: auth
@@ -77,7 +77,7 @@ def send_au_sms(to, body):
     # api_instance = Telstra_Messaging.ProvisioningApi(Telstra_Messaging.ApiClient(configuration))
     # provision_number_request = Telstra_Messaging.ProvisionNumberRequest()  # ProvisionNumberRequest | A JSON payload containing the required attributes
     api_instance = Telstra_Messaging.MessagingApi(Telstra_Messaging.ApiClient(configuration))
-    send_sms_request = Telstra_Messaging.SendSMSRequest(to, body, from_number)
+    send_sms_request = Telstra_Messaging.SendSMSRequest(mobile_number, message, from_number)
 
     try:
         # {'country': [{u'AUS': 1}],
@@ -105,5 +105,5 @@ def send_au_sms(to, body):
         return False, str(e)
 
 
-def send_to_admin(body):
-    send_au_sms(config.ADMIN_MOBILE_NUMBER, body)
+def send_to_admin(message):
+    send_au_sms(config.ADMIN_MOBILE_NUMBER, message)

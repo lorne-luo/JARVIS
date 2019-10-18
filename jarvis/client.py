@@ -10,11 +10,11 @@ JARVIS_PORT = env.int('JARVIS_PORT', default=54321)
 
 class JarvisClient(object):
 
-    def __init__(self, port, hostname='localhost'):
+    def __init__(self, hostname='localhost', port=54321):
         self.conn = rpyc.connect(hostname, port)
 
-    def sms_admin(self, text, from_app=None):
-        return self.conn.root.sms_admin(text, from_app)
+    def sms_admin(self, message, from_app=None):
+        return self.conn.root.sms_admin(message, from_app)
 
     def test(self):
         return print(self.conn.root.config())
@@ -23,5 +23,5 @@ class JarvisClient(object):
 jarvis = JarvisClient(port=JARVIS_PORT, hostname=JARVIS_HOST)
 
 if __name__ == '__main__':
-    client = JarvisClient(54321)
+    client = JarvisClient(port=54321)
     client.test()

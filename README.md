@@ -23,9 +23,17 @@ Or clone the repo:
     $ python setup.py install
 
 
-How to run
+How to run RPYC server
 --------------------
     python server.py
+
+
+How to run RPYC client
+--------------------
+    from jarvis.client from JarvisClient
+    client = JarvisClient(hostname='localhost', port=54321)
+    client.sms_admin('test message',from_app='TEST')
+    
 
 Contributing
 ------------
