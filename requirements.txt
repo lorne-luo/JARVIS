@@ -4,10 +4,12 @@ sphinx_rtd_theme
 nose
 coverage
 pypi-publisher
-aliyun-python-sdk-core-v3==2.9.0
 environs
 click
+aliyun-python-sdk-core-v3==2.9.0
 rpyc==4.1.2
 redis==3.3.8
 python-telegram-bot==12.1.1
 git+https://github.com/Telstra/MessagingAPI-SDK-python.git
+grpcio==1.24.1
+grpcio-tools==1.24.1

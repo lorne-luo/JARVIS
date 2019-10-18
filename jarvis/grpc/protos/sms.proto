@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+
+option java_package = "jarvis.sms";
+option java_outer_classname = "JarvisSMSProto";
+option objc_class_prefix = "JARVISSMS";
+
+package jarvis.sms;
+
+// ==== AU SMS ====
+// au sms request.
+message AuSMSRequest {
+    required string number = 1; // au photo number
+    required string message = 2; // message
+    optional string app = 3; // message come from.
+}
+
+// au sms request.
+message AuAdminSMSRequest {
+    required string message = 1; // message
+    optional string app = 2; // message come from.
+}
+
+// au sms response, as configured by the request.
+message AuSMSResponse {
+    bool success = 1; // successful.
+    string detail = 2; // detail or err msg.
+}
+
+// === CN SMS ===
+// cn sms request
+message CnSMSRequest {
+    message PhoneNumber {
+        required string number = 1;
+    }
+    string to = 1; // au photo number
+    string message = 2; // message
+    optional string app = 3; // message come from.
+}
+
+// CN sms response, as configured by the request.
+message CnSMSResponse {
+    bool success = 1; // successful.
+    string detail = 2; // detail or err msg.
+}
+
+// === Service ===
+service SMSService {
+    // One request followed by one response.
+    rpc UnaryCall(Request) returns (Response);
+}
