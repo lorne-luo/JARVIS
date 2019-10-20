@@ -10,7 +10,7 @@ import rpyc
 from rpyc.utils.server import ThreadedServer
 
 from jarvis.aliyun.email.smtp import send_email
-from jarvis.aliyun.sms.service import send_cn_sms
+from jarvis.aliyun.sms.service import send_aliyun_sms
 from jarvis.redis_client import client
 from jarvis.sms import send_to_admin, send_au_sms
 from jarvis.telegram.bot import telegram_jarvis
@@ -55,7 +55,7 @@ class JarvisService(rpyc.Service):
     def exposed_sms_cn(self, phone_numbers, template_code, template_param=None, business_id=None):
         try:
             business_id = business_id or uuid1()
-            return send_cn_sms(business_id, phone_numbers, template_code, template_param)
+            return send_aliyun_sms(business_id, phone_numbers, template_code, template_param)
         except Exception as ex:
             logger.error(
                 f'[{inspect.stack()[0][3]}] {ex}, to {phone_numbers}, template_code={template_code}, template_param={template_param}')

@@ -1,12 +1,13 @@
 import json
-
 import logging
-from ... import config
-from ...redis_client.counter import increase_aliyun_sms_counter
-from .aliyunsdkdysmsapi.request.v20170525 import SendSmsRequest
-from .aliyunsdkdysmsapi.request.v20170525 import QuerySendDetailsRequest
+
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.profile import region_provider
+
+from .aliyunsdkdysmsapi.request.v20170525 import QuerySendDetailsRequest
+from .aliyunsdkdysmsapi.request.v20170525 import SendSmsRequest
+from ... import config
+from ...redis_client.counter import increase_aliyun_sms_counter
 
 """
 短信业务调用接口示例，版本号：v20170525
@@ -73,7 +74,7 @@ def clean_mobile_number(mobile):
     return cleaned_mobile
 
 
-def send_cn_sms(business_id, phone_numbers, template_code, template_param=None):
+def send_aliyun_sms(business_id, phone_numbers, template_code, template_param=None, from_app=None):
     try:
         phone_numbers = validate_cn_mobile(phone_numbers)
         if not phone_numbers:
