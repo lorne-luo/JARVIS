@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='jarvis.sms',
   syntax='proto3',
   serialized_options=_b('\n\njarvis.smsB\016JarvisSMSProto\242\002\tJARVISSMS'),
-  serialized_pb=_b('\n\tsms.proto\x12\njarvis.sms\"C\n\x0c\x41uSMSRequest\x12\x15\n\rmobile_number\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x0b\n\x03\x61pp\x18\x03 \x01(\t\"1\n\x11\x41uAdminSMSRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0b\n\x03\x61pp\x18\x02 \x01(\t\"0\n\rAuSMSResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0e\n\x06\x64\x65tail\x18\x02 \x01(\t\"\x89\x01\n\x0c\x43nSMSRequest\x12<\n\x0emobile_numbers\x18\x01 \x03(\x0b\x32$.jarvis.sms.CnSMSRequest.PhoneNumber\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x0b\n\x03\x61pp\x18\x03 \x01(\t\x1a\x1d\n\x0bPhoneNumber\x12\x0e\n\x06number\x18\x01 \x01(\t\"0\n\rCnSMSResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0e\n\x06\x64\x65tail\x18\x02 \x01(\t2\xc7\x01\n\x03SMS\x12\x44\n\x08SMSAdmin\x12\x1d.jarvis.sms.AuAdminSMSRequest\x1a\x19.jarvis.sms.AuSMSResponse\x12<\n\x05SMSAu\x12\x18.jarvis.sms.AuSMSRequest\x1a\x19.jarvis.sms.AuSMSResponse\x12<\n\x05SMSCn\x12\x18.jarvis.sms.CnSMSRequest\x1a\x19.jarvis.sms.CnSMSResponseB(\n\njarvis.smsB\x0eJarvisSMSProto\xa2\x02\tJARVISSMSb\x06proto3')
+  serialized_pb=_b('\n\tsms.proto\x12\njarvis.sms\"C\n\x0c\x41uSMSRequest\x12\x15\n\rmobile_number\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x0b\n\x03\x61pp\x18\x03 \x01(\t\"1\n\x11\x41uAdminSMSRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0b\n\x03\x61pp\x18\x02 \x01(\t\"0\n\rAuSMSResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0e\n\x06\x64\x65tail\x18\x02 \x01(\t\"\xc4\x01\n\x10\x41liyunSMSRequest\x12@\n\x0emobile_numbers\x18\x01 \x03(\x0b\x32(.jarvis.sms.AliyunSMSRequest.PhoneNumber\x12\x15\n\rtemplate_code\x18\x02 \x01(\t\x12\x16\n\x0etemplate_param\x18\x03 \x01(\t\x12\x13\n\x0b\x62usiness_id\x18\x04 \x01(\t\x12\x0b\n\x03\x61pp\x18\x05 \x01(\t\x1a\x1d\n\x0bPhoneNumber\x12\x0e\n\x06number\x18\x01 \x01(\t\"4\n\x11\x41liyunSMSResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0e\n\x06\x64\x65tail\x18\x02 \x01(\t2\xd3\x01\n\x03SMS\x12\x44\n\x08SMSAdmin\x12\x1d.jarvis.sms.AuAdminSMSRequest\x1a\x19.jarvis.sms.AuSMSResponse\x12<\n\x05SMSAu\x12\x18.jarvis.sms.AuSMSRequest\x1a\x19.jarvis.sms.AuSMSResponse\x12H\n\tSMSAliyun\x12\x1c.jarvis.sms.AliyunSMSRequest\x1a\x1d.jarvis.sms.AliyunSMSResponseB(\n\njarvis.smsB\x0eJarvisSMSProto\xa2\x02\tJARVISSMSb\x06proto3')
 )
 
 
@@ -147,15 +147,15 @@ _AUSMSRESPONSE = _descriptor.Descriptor(
 )
 
 
-_CNSMSREQUEST_PHONENUMBER = _descriptor.Descriptor(
+_ALIYUNSMSREQUEST_PHONENUMBER = _descriptor.Descriptor(
   name='PhoneNumber',
-  full_name='jarvis.sms.CnSMSRequest.PhoneNumber',
+  full_name='jarvis.sms.AliyunSMSRequest.PhoneNumber',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='number', full_name='jarvis.sms.CnSMSRequest.PhoneNumber.number', index=0,
+      name='number', full_name='jarvis.sms.AliyunSMSRequest.PhoneNumber.number', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -173,34 +173,48 @@ _CNSMSREQUEST_PHONENUMBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=304,
-  serialized_end=333,
+  serialized_start=363,
+  serialized_end=392,
 )
 
-_CNSMSREQUEST = _descriptor.Descriptor(
-  name='CnSMSRequest',
-  full_name='jarvis.sms.CnSMSRequest',
+_ALIYUNSMSREQUEST = _descriptor.Descriptor(
+  name='AliyunSMSRequest',
+  full_name='jarvis.sms.AliyunSMSRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='mobile_numbers', full_name='jarvis.sms.CnSMSRequest.mobile_numbers', index=0,
+      name='mobile_numbers', full_name='jarvis.sms.AliyunSMSRequest.mobile_numbers', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='message', full_name='jarvis.sms.CnSMSRequest.message', index=1,
+      name='template_code', full_name='jarvis.sms.AliyunSMSRequest.template_code', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='app', full_name='jarvis.sms.CnSMSRequest.app', index=2,
+      name='template_param', full_name='jarvis.sms.AliyunSMSRequest.template_param', index=2,
       number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='business_id', full_name='jarvis.sms.AliyunSMSRequest.business_id', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app', full_name='jarvis.sms.AliyunSMSRequest.app', index=4,
+      number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -208,7 +222,7 @@ _CNSMSREQUEST = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_CNSMSREQUEST_PHONENUMBER, ],
+  nested_types=[_ALIYUNSMSREQUEST_PHONENUMBER, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -218,26 +232,26 @@ _CNSMSREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=196,
-  serialized_end=333,
+  serialized_end=392,
 )
 
 
-_CNSMSRESPONSE = _descriptor.Descriptor(
-  name='CnSMSResponse',
-  full_name='jarvis.sms.CnSMSResponse',
+_ALIYUNSMSRESPONSE = _descriptor.Descriptor(
+  name='AliyunSMSResponse',
+  full_name='jarvis.sms.AliyunSMSResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='success', full_name='jarvis.sms.CnSMSResponse.success', index=0,
+      name='success', full_name='jarvis.sms.AliyunSMSResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='detail', full_name='jarvis.sms.CnSMSResponse.detail', index=1,
+      name='detail', full_name='jarvis.sms.AliyunSMSResponse.detail', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -255,17 +269,17 @@ _CNSMSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=335,
-  serialized_end=383,
+  serialized_start=394,
+  serialized_end=446,
 )
 
-_CNSMSREQUEST_PHONENUMBER.containing_type = _CNSMSREQUEST
-_CNSMSREQUEST.fields_by_name['mobile_numbers'].message_type = _CNSMSREQUEST_PHONENUMBER
+_ALIYUNSMSREQUEST_PHONENUMBER.containing_type = _ALIYUNSMSREQUEST
+_ALIYUNSMSREQUEST.fields_by_name['mobile_numbers'].message_type = _ALIYUNSMSREQUEST_PHONENUMBER
 DESCRIPTOR.message_types_by_name['AuSMSRequest'] = _AUSMSREQUEST
 DESCRIPTOR.message_types_by_name['AuAdminSMSRequest'] = _AUADMINSMSREQUEST
 DESCRIPTOR.message_types_by_name['AuSMSResponse'] = _AUSMSRESPONSE
-DESCRIPTOR.message_types_by_name['CnSMSRequest'] = _CNSMSREQUEST
-DESCRIPTOR.message_types_by_name['CnSMSResponse'] = _CNSMSRESPONSE
+DESCRIPTOR.message_types_by_name['AliyunSMSRequest'] = _ALIYUNSMSREQUEST
+DESCRIPTOR.message_types_by_name['AliyunSMSResponse'] = _ALIYUNSMSRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AuSMSRequest = _reflection.GeneratedProtocolMessageType('AuSMSRequest', (_message.Message,), {
@@ -289,27 +303,27 @@ AuSMSResponse = _reflection.GeneratedProtocolMessageType('AuSMSResponse', (_mess
   })
 _sym_db.RegisterMessage(AuSMSResponse)
 
-CnSMSRequest = _reflection.GeneratedProtocolMessageType('CnSMSRequest', (_message.Message,), {
+AliyunSMSRequest = _reflection.GeneratedProtocolMessageType('AliyunSMSRequest', (_message.Message,), {
 
   'PhoneNumber' : _reflection.GeneratedProtocolMessageType('PhoneNumber', (_message.Message,), {
-    'DESCRIPTOR' : _CNSMSREQUEST_PHONENUMBER,
+    'DESCRIPTOR' : _ALIYUNSMSREQUEST_PHONENUMBER,
     '__module__' : 'sms_pb2'
-    # @@protoc_insertion_point(class_scope:jarvis.sms.CnSMSRequest.PhoneNumber)
+    # @@protoc_insertion_point(class_scope:jarvis.sms.AliyunSMSRequest.PhoneNumber)
     })
   ,
-  'DESCRIPTOR' : _CNSMSREQUEST,
+  'DESCRIPTOR' : _ALIYUNSMSREQUEST,
   '__module__' : 'sms_pb2'
-  # @@protoc_insertion_point(class_scope:jarvis.sms.CnSMSRequest)
+  # @@protoc_insertion_point(class_scope:jarvis.sms.AliyunSMSRequest)
   })
-_sym_db.RegisterMessage(CnSMSRequest)
-_sym_db.RegisterMessage(CnSMSRequest.PhoneNumber)
+_sym_db.RegisterMessage(AliyunSMSRequest)
+_sym_db.RegisterMessage(AliyunSMSRequest.PhoneNumber)
 
-CnSMSResponse = _reflection.GeneratedProtocolMessageType('CnSMSResponse', (_message.Message,), {
-  'DESCRIPTOR' : _CNSMSRESPONSE,
+AliyunSMSResponse = _reflection.GeneratedProtocolMessageType('AliyunSMSResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ALIYUNSMSRESPONSE,
   '__module__' : 'sms_pb2'
-  # @@protoc_insertion_point(class_scope:jarvis.sms.CnSMSResponse)
+  # @@protoc_insertion_point(class_scope:jarvis.sms.AliyunSMSResponse)
   })
-_sym_db.RegisterMessage(CnSMSResponse)
+_sym_db.RegisterMessage(AliyunSMSResponse)
 
 
 DESCRIPTOR._options = None
@@ -320,8 +334,8 @@ _SMS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=386,
-  serialized_end=585,
+  serialized_start=449,
+  serialized_end=660,
   methods=[
   _descriptor.MethodDescriptor(
     name='SMSAdmin',
@@ -342,12 +356,12 @@ _SMS = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='SMSCn',
-    full_name='jarvis.sms.SMS.SMSCn',
+    name='SMSAliyun',
+    full_name='jarvis.sms.SMS.SMSAliyun',
     index=2,
     containing_service=None,
-    input_type=_CNSMSREQUEST,
-    output_type=_CNSMSRESPONSE,
+    input_type=_ALIYUNSMSREQUEST,
+    output_type=_ALIYUNSMSRESPONSE,
     serialized_options=None,
   ),
 ])

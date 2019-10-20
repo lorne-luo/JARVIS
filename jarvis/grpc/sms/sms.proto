@@ -27,19 +27,21 @@ message AuSMSResponse {
     string detail = 2; // detail or err msg.
 }
 
-// === CN SMS ===
-// cn sms request
-message CnSMSRequest {
+// === ALIYUN SMS ===
+// aliyun sms request
+message AliyunSMSRequest {
     message PhoneNumber {
         string number = 1;
     }
     repeated PhoneNumber mobile_numbers = 1; // au photo number
-    string message = 2; // message
-    string app = 3; // message come from.
+    string template_code = 2; // template_code
+    string template_param = 3; // template_param
+    string business_id = 4; // business_id
+    string app = 5; // app.
 }
 
-// CN sms response, as configured by the request.
-message CnSMSResponse {
+// aliyun sms response, as configured by the request.
+message AliyunSMSResponse {
     bool success = 1; // successful.
     string detail = 2; // detail or err msg.
 }
@@ -50,7 +52,7 @@ service SMS {
     rpc SMSAdmin(AuAdminSMSRequest) returns (AuSMSResponse);
     rpc SMSAu(AuSMSRequest) returns (AuSMSResponse);
 
-    // CN SMS
-    rpc SMSCn(CnSMSRequest) returns (CnSMSResponse);
+    // Aliyun SMS
+    rpc SMSAliyun(AliyunSMSRequest) returns (AliyunSMSResponse);
 
 }

@@ -24,10 +24,10 @@ class SMSStub(object):
         request_serializer=sms__pb2.AuSMSRequest.SerializeToString,
         response_deserializer=sms__pb2.AuSMSResponse.FromString,
         )
-    self.SMSCn = channel.unary_unary(
-        '/jarvis.sms.SMS/SMSCn',
-        request_serializer=sms__pb2.CnSMSRequest.SerializeToString,
-        response_deserializer=sms__pb2.CnSMSResponse.FromString,
+    self.SMSAliyun = channel.unary_unary(
+        '/jarvis.sms.SMS/SMSAliyun',
+        request_serializer=sms__pb2.AliyunSMSRequest.SerializeToString,
+        response_deserializer=sms__pb2.AliyunSMSResponse.FromString,
         )
 
 
@@ -49,8 +49,8 @@ class SMSServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def SMSCn(self, request, context):
-    """CN SMS
+  def SMSAliyun(self, request, context):
+    """Aliyun SMS
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -69,10 +69,10 @@ def add_SMSServicer_to_server(servicer, server):
           request_deserializer=sms__pb2.AuSMSRequest.FromString,
           response_serializer=sms__pb2.AuSMSResponse.SerializeToString,
       ),
-      'SMSCn': grpc.unary_unary_rpc_method_handler(
-          servicer.SMSCn,
-          request_deserializer=sms__pb2.CnSMSRequest.FromString,
-          response_serializer=sms__pb2.CnSMSResponse.SerializeToString,
+      'SMSAliyun': grpc.unary_unary_rpc_method_handler(
+          servicer.SMSAliyun,
+          request_deserializer=sms__pb2.AliyunSMSRequest.FromString,
+          response_serializer=sms__pb2.AliyunSMSResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
