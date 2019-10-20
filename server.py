@@ -20,15 +20,11 @@ logger = logging.getLogger(__name__)
 
 class JarvisService(rpyc.Service):
 
-    def exposed_add(self, a, b):
-        print(inspect.stack()[0][3])
-        return a + b
-
     # =================================== SMS =================================
-    def exposed_sms_au(self, to, message, from_app):
+    def exposed_sms_au(self, mobile_number, message, from_app):
         try:
-            logger.info(f'sms_au from {from_app}: {to} @ {message}')
-            return send_au_sms(to, message)
+            logger.info(f'sms_au from {from_app}: {mobile_number} @ {message}')
+            return send_au_sms(mobile_number, message)
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
