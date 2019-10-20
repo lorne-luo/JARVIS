@@ -13,7 +13,7 @@ ORDER_CHANNEL = 12
 
 REDIS_HOST = env('REDIS_HOST')
 REDIS_PORT = env('REDIS_PORT')
-REDIS_DB_NUMBER = env.int('REDIS_DB_NUMBER', default=0)
+REDIS_DB_NUMBER = env.int('REDIS_DB_NUMBER', default=3)
 
 # === TELSTRA SMS ===
 

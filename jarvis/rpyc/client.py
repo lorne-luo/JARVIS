@@ -16,12 +16,12 @@ class JarvisClient(object):
     def sms_admin(self, message, from_app=None):
         return self.conn.root.sms_admin(message, from_app)
 
-    def test(self):
-        return print(self.conn.root.config())
+    def telegram_jarvis(self, message, from_app=None):
+        return self.conn.root.telegram_jarvis(message, from_app)
 
 
 jarvis = JarvisClient(port=JARVIS_PORT, hostname=JARVIS_HOST)
 
 if __name__ == '__main__':
     client = JarvisClient(port=54321)
-    client.test()
+    client.telegram_jarvis('test message!')

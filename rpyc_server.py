@@ -5,8 +5,8 @@ from datetime import datetime
 from uuid import uuid1
 
 import click
-import redis
 import rpyc
+from redis import ConnectionError
 from rpyc.utils.server import ThreadedServer
 
 from jarvis.aliyun.email.smtp import send_email
@@ -67,7 +67,7 @@ def main(port):
     # test redis connection
     try:
         client.test_connection()
-    except redis.ConnectionError as ex:
+    except ConnectionError as ex:
         logger.error(str(ex))
         sys.stderr.write(f'{str(ex)}\n')
         return 1
