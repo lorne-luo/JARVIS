@@ -17,7 +17,7 @@ THREAD_WORKER_NUMBTER = 3
 
 
 @click.command()
-@click.option('--port', default=54321, help='Port of JARVIS service')
+@click.option("--port", "-p", default=54321, help='Port of JARVIS service')
 def main(port):
     # test redis connection
     try:
