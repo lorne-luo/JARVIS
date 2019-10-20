@@ -75,7 +75,7 @@ def main(port):
     server = ThreadedServer(JarvisService, port=port)
 
     dt_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    start_info = f"{dt_str}# JARVIS started."
+    start_info = f"{dt_str}# JARVIS started, listening to port {port}."
     logger.info(start_info)
 
     server.start()

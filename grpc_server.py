@@ -1,6 +1,7 @@
 import logging
 import sys
 from concurrent import futures
+from datetime import datetime
 
 import click
 import grpc
@@ -14,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 @click.command()
-@click.option('--port', default=50051, help='Port of JARVIS service')
+@click.option('--port', default=54321, help='Port of JARVIS service')
 def main(port):
     # test redis connection
     try:
@@ -26,10 +27,14 @@ def main(port):
 
     # grpc server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
-
     sms_pb2_grpc.add_SMSServicer_to_server(SMS(), server)
 
     server.add_insecure_port(f'[::]:{port}')
+
+    dt_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    start_info = f"{dt_str}# JARVIS started, listening to port {port}."
+    logger.info(start_info)
+
     server.start()
     server.wait_for_termination()
 
