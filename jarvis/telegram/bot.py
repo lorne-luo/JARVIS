@@ -13,5 +13,5 @@ def telegram_message(chat_id, message):
     return bot.send_message(chat_id, message)
 
 
-def telegram_admin(message):
+def telegram_jarvis(message):
     return bot.send_message(config.MY_CHAT_ID, message)

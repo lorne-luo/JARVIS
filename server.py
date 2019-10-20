@@ -13,7 +13,7 @@ from jarvis.aliyun.email.smtp import send_email
 from jarvis.aliyun.sms.service import send_cn_sms
 from jarvis.redis_client import client
 from jarvis.sms import send_to_admin, send_au_sms
-from jarvis.telegram.bot import telegram_admin
+from jarvis.telegram.bot import telegram_jarvis
 
 logger = logging.getLogger(__name__)
 
@@ -36,10 +36,10 @@ class JarvisService(rpyc.Service):
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
     # =================================== TELEGRAM =================================
-    def exposed_telegram_admin(self, message, from_app):
+    def exposed_telegram_jarvis(self, message, from_app):
         try:
-            logger.info(f'telegram_admin from {from_app}: {message}')
-            return telegram_admin(message)
+            logger.info(f'telegram_jarvis from {from_app}: {message}')
+            return telegram_jarvis(message)
         except Exception as ex:
             logger.error(f'[{inspect.stack()[0][3]}] {ex}, message={message}')
 
