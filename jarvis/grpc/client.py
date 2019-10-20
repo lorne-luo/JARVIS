@@ -1,8 +1,8 @@
 import grpc
 from environs import Env
 
-from .sms import sms_pb2
-from .sms import sms_pb2_grpc
+from .stub import sms_pb2
+from .stub import sms_pb2_grpc
 
 env = Env()
 env.read_env()

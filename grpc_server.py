@@ -7,11 +7,13 @@ import click
 import grpc
 import redis
 
-from jarvis.grpc.sms import sms_pb2_grpc
-from jarvis.grpc.sms.service import SMS
+from jarvis.grpc.service import SMS
+from jarvis.grpc.stub import sms_pb2_grpc
 from jarvis.redis_client import client as redis_client
 
 logger = logging.getLogger(__name__)
+
+THREAD_WORKER_NUMBTER = 3
 
 
 @click.command()
@@ -26,7 +28,7 @@ def main(port):
         return 1
 
     # grpc server
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=THREAD_WORKER_NUMBTER))
     sms_pb2_grpc.add_SMSServicer_to_server(SMS(), server)
 
     server.add_insecure_port(f'[::]:{port}')

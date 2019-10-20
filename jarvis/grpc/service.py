@@ -1,9 +1,9 @@
 import logging
 
-from . import sms_pb2
-from . import sms_pb2_grpc
-from ...aliyun.sms.service import send_aliyun_sms
-from ...sms import send_to_admin, send_au_sms
+from .stub import sms_pb2
+from .stub import sms_pb2_grpc
+from ..aliyun.sms.service import send_aliyun_sms
+from ..sms import send_to_admin, send_au_sms
 
 logger = logging.getLogger(__name__)
 
